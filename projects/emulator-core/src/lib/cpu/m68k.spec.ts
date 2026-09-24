@@ -19,4 +19,13 @@ describe('M68K', () => {
 
     expect(cpu.programCounter).toBe(0x1002);
   });
+
+  it('should throw error when unknow instruction is passed', () => {
+    bus.write16(0x1000, 0xFFFF);
+
+    cpu.programCounter = 0x1000;
+
+    expect(() => cpu.step()).toThrow('Unknown opcode: 0xffff');
+
+  })
 });
